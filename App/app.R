@@ -69,7 +69,6 @@ server <- function(input, output){
       select(Season, user_choice)
     
     custom_summary <- filter(custom_summary, !is.na(custom_summary[,2])) # prevent rectangle geom from acting strangely with jump discontinuities
-    View(custom_summary)
     
     # define width of rectangle contingent on user era input
     if (input$era == "Dead Ball Era (1901-1919)") {
