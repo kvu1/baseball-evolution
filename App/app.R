@@ -9,6 +9,7 @@ library(plotly)
 # read in dataset
 batting_summary <- read.csv("summary_bat.csv") %>%
   select(-X)
+
 names(batting_summary) <- c("Season", 
                             "Batting Average", 
                             "On-Base Percentage",
@@ -21,7 +22,7 @@ names(batting_summary) <- c("Season",
                             "Walk-to-Strikeout Ratio",
                             "Sacrifice Hit Rate")
 
-batting_summary[, 7:11] <- round(batting_summary[, 7:11], 5)
+batting_summary[, 7:11] <- round(batting_summary[, 7:11], 5) # round granular ratios to 5 decimal places
 
 ##### UI SIDE #####
 ui <- navbarPage(
@@ -50,8 +51,9 @@ ui <- navbarPage(
                               "Steroid Era (1990-2005)"))
       
     ),
+    
     mainPanel(
-      plotlyOutput(outputId = "historyPlot")
+      plotly::plotlyOutput(outputId = "historyPlot")
     )
   )
 )
@@ -66,9 +68,10 @@ server <- function(input, output){
     custom_summary <- batting_summary %>%
       select(Season, user_choice)
     
-    custom_summary <- filter(custom_summary, !is.na(custom_summary[,2])) # prevent rectangle geom from acting funky
+    custom_summary <- filter(custom_summary, !is.na(custom_summary[,2])) # prevent rectangle geom from acting strangely with jump discontinuities
     View(custom_summary)
     
+    # define width of rectangle contingent on user era input
     if (input$era == "Dead Ball Era (1901-1919)") {
       interval <- c(1901, 1919)
     } else if (input$era == "Live Ball Era (1920-1941)") {
