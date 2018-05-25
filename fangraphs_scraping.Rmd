@@ -79,7 +79,8 @@ summary_frame <- big_bat %>%
             bb_pct = sum(bb) / sum(pa),
             k_pct = sum(so) / sum(pa),
             bb_k_ratio = sum(bb) / sum(so),
-            sac_rate = sum(sh) / sum(pa))
+            sac_rate = sum(sh) / sum(pa),
+            three_true = (sum(hr) + sum(bb) + sum(so)) / sum(pa))
 
 write.csv(summary_frame, file = "summary_bat.csv") # save locally
 ```
