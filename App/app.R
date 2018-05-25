@@ -90,7 +90,7 @@ ui <- navbarPage(
   tabPanel("Links",
            mainPanel(
              h3("Data Sources:"), htmlOutput("fangraphs"), br(), htmlOutput("era"), br(),
-             h3("Code:"), htmlOutput("git"),
+             h3("Code:"), htmlOutput("git"), br(),
              h3("Photography:"), htmlOutput("bryce")
            ))
   )
