@@ -37,7 +37,7 @@ ui <- navbarPage(
              br(),
              img(src = "bryce.jpg"),
              h2("Welcome!"), br(),
-             h5("Though the prolonged pace of Major League Baseball games has led me to shy from watching a full nine innings this season, I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
+             h5("Though the prolonged pace of Major League Baseball games has led me to shy from watching a full nine innings this season (I wrote the code for this app and the underlying data scraping and took a nap within the span of one inning, give or take), I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
              br(), h5(htmlOutput("narrative_two")),
              br(), h5(htmlOutput("narrative_three")),
              br(), h5(htmlOutput("narrative_four")), br(), br()
