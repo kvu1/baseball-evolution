@@ -37,7 +37,7 @@ ui <- navbarPage(
              br(),
              img(src = "bryce.jpg"),
              h2("Welcome!"), br(),
-             h5("Though the prolonged pace of Major League Baseball games has led me to shy from watching a full nine innings this season (I wrote the code for this app and the underlying data scraping and took a nap within the span of one inning, give or take), I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
+             h5("Though the lethargic pace of Major League Baseball games has led me to shy from watching a full nine innings this season (I wrote the code for this app and the underlying data scraping and took a nap within the span of one inning, give or take), I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
              br(), h5(htmlOutput("narrative_two")),
              br(), h5(htmlOutput("narrative_three")),
              br(), h5(htmlOutput("narrative_four")), br(), br()
@@ -103,8 +103,9 @@ server <- function(input, output){
     HTML(paste0("<a href='", usa_link, "' target='_blank'>USA Today Sports Images</a>"))
   })
   output$narrative_two <- renderText({
+    jose_link <- "https://www.youtube.com/watch?v=-UdsVO7HaJg"
     pujols_link <- "https://www.youtube.com/watch?v=lsEuTYbDRwE"
-    HTML(paste0("Back when I watched baseball more frequently, I found the home run to be the most magnetizing aspect of the game. A violent swing of a bat sends rubber and cork flying hundreds of feet, all while the stadium fills with deafening applause or  <a href='", pujols_link, "' target='_blank'>deafening silence.</a>"))
+    HTML(paste0("Back when I watched baseball more frequently, I found the home run to be the most magnetizing aspect of the game. A violent swing of a bat sends rubber and cork flying hundreds of feet, all while the stadium fills with <a href='", jose_link, "' target='_blank'>deafening applause</a> or  <a href='", pujols_link, "' target='_blank'>deafening silence.</a>"))
   })
   
   fangraphs_link <- "https://www.fangraphs.com/"
@@ -114,7 +115,7 @@ server <- function(input, output){
   
   output$narrative_four <- renderText({
     juice_link <- "https://www.usatoday.com/story/sports/mlb/2018/05/24/mlb-home-run-study-juiced-ball-aerodynamics-carry-humidor/641654002/"
-    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game.</a> We can also observe that, in addition to homering more often, hitters are also striking out more often. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has also been rising to unprecedented levels leaguewide."))
+    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game.</a> We can also observe that, in addition to homering more often, hitters are striking out more often too. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has been rising to unprecedented levels leaguewide."))
   })
   
   output$fangraphs <- renderText({
@@ -123,7 +124,7 @@ server <- function(input, output){
   
   netshrine_link <- "http://www.netshrine.com/era.html"
   output$era <- renderText({
-    HTML(paste0("Information about Major League Baseball's historical eras was adapted from <a href='", netshrine_link, "' target='_blank'>NetShrine.</a>"))
+    HTML(paste0("Information about Major League Baseball's historical eras was adapted from <a href='", netshrine_link, "' target='_blank'>NetShrine.</a> See the link to learn more about these eras."))
   })
   
   github_link <- "https://github.com/kvu1/baseball-evolution"
