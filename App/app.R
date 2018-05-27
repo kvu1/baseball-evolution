@@ -157,7 +157,6 @@ server <- function(input, output){
     
     user_dependent <- custom_summary[, 2]
     
-    
     # interactive scatterplot
     plot_ly(data = custom_summary,
             x = ~Season,
@@ -178,7 +177,7 @@ server <- function(input, output){
                            x0 = interval[1], x1 = interval[2], xref = "x",
                            y0 = min(user_dependent), y1 = max(user_dependent), yref = "y"
                            ) # set bounds on how high the rectangle extends
-             )
+              )
   
   })
 }
