@@ -1,0 +1,84 @@
+---
+title: "Fangraphs Scraping"
+author: "Kyle Vu"
+date: "5/28/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# load any libraries needed
+library(rvest)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+```
+
+```{r}
+# for-loop to scrape data
+for(year in 1871:2017){
+  
+  year_url <- paste0("https://www.fangraphs.com/leaders.aspx?pos=all&stats=bat&lg=all&qual=0&type=0&season=", year, "&month=0&season1=", year, "&ind=0&team=0,ts&rost=0&age=0&filter=&players=0") # iteratively create urls for each year in defined range above
+  
+  # scrape tables
+  baseball_tables <- year_url %>%
+    read_html() %>%
+    html_nodes(css = "table")
+  
+  # turn html table into R object
+  batting_stats <- html_table(baseball_tables[[12]], fill=TRUE)
+  colnames(batting_stats) <- batting_stats[2, ]
+  batting_stats <- batting_stats[-c(1:3), ] %>%
+    select(-`#`, - AVG) %>%
+    mutate(season = year) # tag each observation with an associated season
+  names(batting_stats) <- str_to_lower(names(batting_stats))
+  
+  write.csv(batting_stats, file = paste0("fangraphs_batting", year, ".csv")) # store each year locally
+}
+```
+
+```{r}
+# creating one big table from all scraped years with a for-loop
+big_bat <- data.frame() # initialize empty data frame
+for(year in 1871:2017){
+  fresh_table <- read.csv(paste0("fangraphs_batting", year, ".csv"))
+  big_bat <- rbind(big_bat, fresh_table)
+}
+
+# rename variables containing numerics, add total bases variable
+big_bat <- big_bat %>%
+  select(-X, -g) %>%
+  rename(sing = X1b, dub = X2b, trip = X3b) %>%
+  mutate(tb = 4 * hr + 3 * trip + 2 * dub + sing)
+
+write.csv(big_bat, file = "big_bat.csv") # save locally
+big_bat <- read.csv("big_bat.csv") %>%
+  select(-X)
+```
+
+```{r}
+# evaluate missingness
+batting_NAs <- big_bat %>%
+  group_by(season) %>%
+  summarize_all(funs(sum(is.na(.)))) # strikeout data seems to be reported uniformly after 1913
+
+# create summary table with summary seasonal stats of interest
+summary_frame <- big_bat %>%
+  group_by(season) %>%
+  summarise(season_avg = round(sum(h) / sum(ab), 3),
+            season_obp = round((sum(h) + sum(bb) + sum(hbp)) / (sum(pa)), 3),
+            season_slg = round(sum(tb) / sum(ab), 3),
+            season_ops = season_obp + season_slg,
+            num_hr = sum(hr),
+            hr_rate = sum(hr) / sum(pa),
+            bb_pct = sum(bb) / sum(pa),
+            k_pct = sum(so) / sum(pa),
+            bb_k_ratio = sum(bb) / sum(so),
+            sac_rate = sum(sh) / sum(pa),
+            three_true = (sum(hr) + sum(bb) + sum(so)) / sum(pa))
+
+write.csv(summary_frame, file = "summary_bat.csv") # save locally
+```
