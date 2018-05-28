@@ -37,7 +37,7 @@ ui <- navbarPage(
              br(),
              img(src = "bryce.jpg"),
              h2("Welcome!"), br(),
-             h5("Though the lethargic pace of Major League Baseball games (I wrote the code for this app and the underlying data scraping and took a nap within the span of one inning, give or take) has led me to shy from watching a full nine innings this season, I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
+             h5("Though the lethargic pace of Major League Baseball games (I wrote the code for this app and took a nap within the span of one inning, give or take) has led me to shy from watching a full nine innings this season, I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
              br(), h5(htmlOutput("narrative_two")),
              br(), h5(htmlOutput("narrative_three")),
              br(), h5(htmlOutput("narrative_four")), br(), br()
@@ -83,7 +83,7 @@ ui <- navbarPage(
              br(), h4(names(batting_summary)[9]), h6("Proportion of plate appearances that end with a strikeout"),
              br(), h4(names(batting_summary)[10]), h6("Ratio of bases on balls to strikeouts"),
              br(), h4(names(batting_summary)[11]), h6("Proportion of plate appearances that end with a sacrifice hit (the advancing of runners by bunting the ball for an out)"),
-             br(), h4(names(batting_summary)[12]), h6("Proportion of plate appearances that end via bases on balls, home runs, or strikeouts (i.e. without a ball put into play"),
+             br(), h4(names(batting_summary)[12]), h6("Proportion of plate appearances that end via bases on balls, home runs, or strikeouts (i.e. without a ball put into play)"),
              br(), br())
            ),
   
@@ -115,7 +115,7 @@ server <- function(input, output){
   
   output$narrative_four <- renderText({
     juice_link <- "https://www.usatoday.com/story/sports/mlb/2018/05/24/mlb-home-run-study-juiced-ball-aerodynamics-carry-humidor/641654002/"
-    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game.</a> We can also observe that, in addition to homering more often, hitters are striking out more often too. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has been rising to unprecedented levels leaguewide."))
+    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study commissioned by Major League Baseball</a> indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game. We can also observe that, in addition to homering more often, hitters are striking out more often too. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has been rising to unprecedented levels leaguewide."))
   })
   
   output$fangraphs <- renderText({
