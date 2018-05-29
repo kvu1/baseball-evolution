@@ -97,7 +97,6 @@ ui <- navbarPage(
 
 ##### SERVER SIDE #####
 server <- function(input, output){
-  
   output$bryce <- renderText({
     usa_link <- "http://www.usatsimg.com/"
     HTML(paste0("<a href='", usa_link, "' target='_blank'>USA Today Sports Images</a>"))
@@ -115,7 +114,7 @@ server <- function(input, output){
   
   output$narrative_four <- renderText({
     juice_link <- "https://www.usatoday.com/story/sports/mlb/2018/05/24/mlb-home-run-study-juiced-ball-aerodynamics-carry-humidor/641654002/"
-    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study commissioned by Major League Baseball</a> indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game. We can also observe that, in addition to homering more often, hitters are striking out more often too. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has been rising to unprecedented levels leaguewide."))
+    HTML(paste0("Using this app, we can clearly see that home runs are now occurring more frequently than at any other point in league history.  <a href='", juice_link, "' target='_blank'>A new study commissioned by Major League Baseball</a> indicates that this surge is at least partially explained by newly altered aerodynamic properties of the baseballs being used in-game. We can also observe that, in addition to homering more often, hitters are striking out more often too. Indeed, the frequency of the 'three true outcomes' (walks, homers, and strikeouts) has been rising to unprecedented levels leaguewide; one might surmise that a shift in batters' approaches also contributes to the proliferation of home runs."))
   })
   
   output$fangraphs <- renderText({

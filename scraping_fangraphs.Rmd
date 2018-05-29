@@ -18,6 +18,7 @@ library(ggplot2)
 ```
 
 ```{r}
+big_bat <- data.frame()
 # for-loop to scrape data
 for(year in 1871:2017){
   
@@ -36,7 +37,8 @@ for(year in 1871:2017){
     mutate(season = year) # tag each observation with an associated season
   names(batting_stats) <- str_to_lower(names(batting_stats))
   
-  write.csv(batting_stats, file = paste0("fangraphs_batting", year, ".csv")) # store each year locally
+  #write.csv(batting_stats, file = paste0("fangraphs_batting", year, ".csv")) # store each year locally
+  big_bat <- rbind(big_bat, batting_stats)
 }
 ```
 
@@ -48,6 +50,15 @@ for(year in 1871:2017){
   big_bat <- rbind(big_bat, fresh_table)
 }
 
+seasons <- big_bat$season
+teams <- big_bat$team
+
+big_bat2 <- big_bat %>%
+  select(-season, -team) %>%
+  sapply(as.numeric) %>%
+  cbind(seasons) %>%
+  cbind(teams)
+
 # rename variables containing numerics, add total bases variable
 big_bat <- big_bat %>%
   select(-X, -g) %>%
@@ -58,6 +69,8 @@ write.csv(big_bat, file = "big_bat.csv") # save locally
 big_bat <- read.csv("big_bat.csv") %>%
   select(-X)
 ```
+
+
 
 ```{r}
 # evaluate missingness
