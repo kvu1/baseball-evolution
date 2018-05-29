@@ -37,10 +37,10 @@ ui <- navbarPage(
              br(),
              img(src = "bryce.jpg"),
              h2("Welcome!"), br(),
-             h5("Though the lethargic pace of Major League Baseball games (I wrote the code for this app and took a nap within the span of one inning, give or take) has led me to shy from watching a full nine innings this season, I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
-             br(), h5(htmlOutput("narrative_two")),
-             br(), h5(htmlOutput("narrative_three")),
-             br(), h5(htmlOutput("narrative_four")), br(), br()
+             p("Though the lethargic pace of Major League Baseball games (I wrote the code for this app and took a nap within the span of one inning, give or take) has led me to shy from watching a full nine innings this season, I'm still very curious about the sport and the league. After all, baseball was the first sport that I enjoyed as a kid. It was also (as is the case for many) the backdrop of my introduction to quantitative approaches to measuring performance."),
+             br(), p(htmlOutput("narrative_two")),
+             br(), p(htmlOutput("narrative_three")),
+             br(), p(htmlOutput("narrative_four")), br(), br()
            )),
   
   tabPanel("Chart", 
@@ -72,18 +72,18 @@ ui <- navbarPage(
   
   tabPanel("Data Glossary",
            mainPanel(
-             h3("Variable Definitions"),
-             br(), h4(names(batting_summary)[2]), h6("Proportion of at-bats that end with a base hit"),
-             br(), h4(names(batting_summary)[3]), h6("Proportion of plate appearances that end with the batter reaching base via base hit, base on balls, or hit by pitch"),
-             br(), h4(names(batting_summary)[4]), h6("Total bases (attained via base hit) per at-bat"),
-             br(), h4(names(batting_summary)[5]), h6("Sum of on-base and slugging percentages"),
-             br(), h4(names(batting_summary)[6]), h6("Number of home runs hit league-wide"),
-             br(), h4(names(batting_summary)[7]), h6("Proportion of plate appearances that end with a home run"),
-             br(), h4(names(batting_summary)[8]), h6("Proportion of plate appearances that end with a base on balls"),
-             br(), h4(names(batting_summary)[9]), h6("Proportion of plate appearances that end with a strikeout"),
-             br(), h4(names(batting_summary)[10]), h6("Ratio of bases on balls to strikeouts"),
-             br(), h4(names(batting_summary)[11]), h6("Proportion of plate appearances that end with a sacrifice hit (the advancing of runners by bunting the ball for an out)"),
-             br(), h4(names(batting_summary)[12]), h6("Proportion of plate appearances that end via bases on balls, home runs, or strikeouts (i.e. without a ball put into play)"),
+             h2("Variable Definitions"),
+             br(), h4(names(batting_summary)[2]), p("Proportion of at-bats that end with a base hit"),
+             br(), h4(names(batting_summary)[3]), p("Proportion of plate appearances that end with the batter reaching base via base hit, base on balls, or hit by pitch"),
+             br(), h4(names(batting_summary)[4]), p("Total bases (attained via base hit) per at-bat"),
+             br(), h4(names(batting_summary)[5]), p("Sum of on-base and slugging percentages"),
+             br(), h4(names(batting_summary)[6]), p("Number of home runs hit league-wide"),
+             br(), h4(names(batting_summary)[7]), p("Proportion of plate appearances that end with a home run"),
+             br(), h4(names(batting_summary)[8]), p("Proportion of plate appearances that end with a base on balls"),
+             br(), h4(names(batting_summary)[9]), p("Proportion of plate appearances that end with a strikeout"),
+             br(), h4(names(batting_summary)[10]), p("Ratio of bases on balls to strikeouts"),
+             br(), h4(names(batting_summary)[11]), p("Proportion of plate appearances that end with a sacrifice hit (the advancing of runners by bunting the ball for an out)"),
+             br(), h4(names(batting_summary)[12]), p("Proportion of plate appearances that end via bases on balls, home runs, or strikeouts (i.e. without a ball put into play)"),
              br(), br())
            ),
   
@@ -128,7 +128,7 @@ server <- function(input, output){
   
   github_link <- "https://github.com/kvu1/baseball-evolution"
   output$git <- renderText({
-    HTML(paste0("Look at the code for the data scraping and app-making on <a href='", github_link, "' target='_blank'>Github.</a>"))
+    HTML(paste0("Check out the code for the data scraping and app-making on <a href='", github_link, "' target='_blank'>Github.</a>"))
   })
   
   output$historyPlot <- renderPlotly({
