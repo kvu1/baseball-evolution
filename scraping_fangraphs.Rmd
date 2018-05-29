@@ -18,7 +18,8 @@ library(ggplot2)
 ```
 
 ```{r}
-big_bat <- data.frame()
+big_bat <- data.frame() # initialize empty data frame
+
 # for-loop to scrape data
 for(year in 1871:2017){
   
@@ -37,38 +38,26 @@ for(year in 1871:2017){
     mutate(season = year) # tag each observation with an associated season
   names(batting_stats) <- str_to_lower(names(batting_stats))
   
-  #write.csv(batting_stats, file = paste0("fangraphs_batting", year, ".csv")) # store each year locally
   big_bat <- rbind(big_bat, batting_stats)
 }
 ```
 
 ```{r}
-# creating one big table from all scraped years with a for-loop
-big_bat <- data.frame() # initialize empty data frame
-for(year in 1871:2017){
-  fresh_table <- read.csv(paste0("fangraphs_batting", year, ".csv"))
-  big_bat <- rbind(big_bat, fresh_table)
-}
-
+# isolate indicator variables
 seasons <- as.data.frame(big_bat$season)
 names(seasons) <- c("season")
 teams <- as.data.frame(big_bat$team)
 names(teams) <- c("team")
 
-big_bat2 <- big_bat %>%
+big_bat <- big_bat %>%
   select(-season, -team) %>%
-  sapply(as.numeric) %>%
-  cbind(seasons) %>%
-  cbind(teams)
+  sapply(as.numeric) %>% # convert variables to numeric
+  cbind(seasons) %>% # rejoin the indicator variables
+  cbind(teams) %>%
+  rename(sing = `1b`, dub = `2b`, trip = `3b`) %>% # rename variables with numerics in name
+  mutate(tb = (4 * hr) + (3 * trip) + (2 * dub) + (sing)) # add total bases variable
 
-# rename variables containing numerics, add total bases variable
-big_bat2 <- big_bat2 %>%
-  rename(sing = `1b`, dub = `2b`, trip = `3b`) %>%
-  mutate(tb = (4 * hr) + (3 * trip) + (2 * dub) + (sing))
-
-write.csv(big_bat2, file = "big_bat.csv") # save locally
-big_bat <- read.csv("big_bat.csv") %>%
-  select(-X)
+write.csv(big_bat, file = "big_bat.csv") # save data locally
 ```
 
 
@@ -77,7 +66,7 @@ big_bat <- read.csv("big_bat.csv") %>%
 # evaluate missingness
 batting_NAs <- big_bat %>%
   group_by(season) %>%
-  summarize_all(funs(sum(is.na(.)))) # strikeout data seems to be reported uniformly after 1913
+  summarize_all(funs(sum(is.na(.))))
 
 # create summary table with summary seasonal stats of interest
 summary_frame <- big_bat %>%
