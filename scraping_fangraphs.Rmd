@@ -50,8 +50,10 @@ for(year in 1871:2017){
   big_bat <- rbind(big_bat, fresh_table)
 }
 
-seasons <- big_bat$season
-teams <- big_bat$team
+seasons <- as.data.frame(big_bat$season)
+names(seasons) <- c("season")
+teams <- as.data.frame(big_bat$team)
+names(teams) <- c("team")
 
 big_bat2 <- big_bat %>%
   select(-season, -team) %>%
@@ -60,12 +62,11 @@ big_bat2 <- big_bat %>%
   cbind(teams)
 
 # rename variables containing numerics, add total bases variable
-big_bat <- big_bat %>%
-  select(-X, -g) %>%
-  rename(sing = X1b, dub = X2b, trip = X3b) %>%
-  mutate(tb = 4 * hr + 3 * trip + 2 * dub + sing)
+big_bat2 <- big_bat2 %>%
+  rename(sing = `1b`, dub = `2b`, trip = `3b`) %>%
+  mutate(tb = (4 * hr) + (3 * trip) + (2 * dub) + (sing))
 
-write.csv(big_bat, file = "big_bat.csv") # save locally
+write.csv(big_bat2, file = "big_bat.csv") # save locally
 big_bat <- read.csv("big_bat.csv") %>%
   select(-X)
 ```
