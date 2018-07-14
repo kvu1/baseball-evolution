@@ -1,5 +1,5 @@
 ---
-title: "Fangraphs Scraping"
+title: "The Evolution of Major League Baseball Offense: Scraping the Data"
 author: "Kyle Vu"
 date: "5/28/2018"
 output: html_document

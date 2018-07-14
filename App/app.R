@@ -30,7 +30,7 @@ ui <- navbarPage(
   
   theme = shinytheme("yeti"),
   
-  title = "The Evolution of Major League Baseball",
+  title = "The Evolution of Major League Baseball Offense",
   
   tabPanel("About",
            mainPanel(
