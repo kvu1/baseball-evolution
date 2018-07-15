@@ -1,2 +1,2 @@
-# baseball-evolution
+# The Evolution of Major League Baseball Offense
 Using batting statistics scraped from [Fangraphs](https://www.fangraphs.com/), I created an interactive RShiny app that allows users to visualize trends in Major League Baseball offensive production over time.
