@@ -128,7 +128,7 @@ server <- function(input, output){
   
   github_link <- "https://github.com/kvu1/baseball-evolution"
   output$git <- renderText({
-    HTML(paste0("Check out the code for the data scraping and app-making on <a href='", github_link, "' target='_blank'>Github.</a>"))
+    HTML(paste0("Check out the code for the data scraping and app-making on <a href='", github_link, "' target='_blank'>GitHub.</a>"))
   })
   
   output$historyPlot <- renderPlotly({
